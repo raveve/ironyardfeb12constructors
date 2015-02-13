@@ -5,11 +5,28 @@ body {
   background-image: linear-gradient(rgba(2, 31, 49, 0.8), rgba(228, 193, 199, 0.8)), url("../images/despicable-me-street-house-32217-hd-wallpapers.jpg");
   width: 100%; }
 
+button {
+  display: block;
+  background-color: #021f31;
+  color: white;
+  margin-right: 0;
+  margin-top: 10%; }
+
+.buttons {
+  border: none;
+  margin-left: 2.65%; }
+
 div {
   border: 2px solid #000000;
   width: 7%;
   height: 65px;
-  display: inline-block; }
+  display: inline-block;
+  position: relative; }
+
+.player {
+  float: left;
+  padding-left: 20%;
+  padding-top: 8%; }
 
 .left-div {
   margin-left: 10%; }
@@ -30,4 +47,5 @@ div {
   width: 12%;
   height: 65px;
   float: right;
-  margin-right: 3%; }
+  margin-right: 3%;
+  border: none; }
