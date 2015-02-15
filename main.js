@@ -1,24 +1,31 @@
-//Minion constructor
+//Player constructor
 
-function Minion() {
-  this.name = "Minion";
+function Player() {
+  this.name = "Minion" || "Gru" || "Evil Minion";
 
-  this.move = function() {
-    var spaces = Math.floor(Math.random() * 12);
-    console.log(this.name + " has moved forward " + spaces + " spaces")
-  }
+  this.move = function (divs) {
+    var spaces = Math.floor((Math.random() * 12) + 1);
+    //Writing the random math generator in this manner returns randomly any number between 1 and 12, including 12 and always a whole number.
+    console.log(this.name + " has moved forward " + spaces + " spaces");
+    evilminion.number("5")
+  };
 }
 
-//Gru constructor
+//Evil Minion steals toy constructor
 
-function Gru() {
-  this.name = "Gru";
+function EvilMinion() {
+  this.move = "5";
+
+  if ((this.name === "Evil Minion") && (this.move === "5")) {
+    $(".agnes").replaceWith('<img class="agnes" src="../images/sad-agnes.png" alt="">');
+    //This .replaceWith does work, tested it in the Console.
+  };
 }
 
 //Evil Minion constructor
 
 function EvilMinion() {
-  this.name = "EvilMinion";
+  this.name = "Evil Minion";
 }
 
 
@@ -33,28 +40,15 @@ var minionRescue = {
   },
 
   initEvents: function () {
-    $("#").on('submit', function (e) {
-      e.preventDefault();
-      var traits = {
-        name: $('#character input[name="name"]').val(),
-      };
-      myPage.character = new Character(traits);
-      myPage.monster = new Monster();
-      myPage.renderBoard();
-
-    });
-
 
     $("#p1-button").on("click", function (event) {
       event.preventDefault();
 
       console.log("#p1-button click worked");
 
-      minionRescue.minion = new Minion();
+      minionRescue.player = new Player("Minion");
 
-      minionRescue.minion.move();
-
-      minionRescue.renderMinion();
+      minionRescue.renderMinion(minionRescue.player.move);
 
     });
 
@@ -63,7 +57,7 @@ var minionRescue = {
 
       console.log("#p2-button click worked");
 
-      minionRescue.gru = new Gru();
+      minionRescue.gru = new Player("Gru");
 
       minionRescue.renderGru();
 
@@ -74,7 +68,7 @@ var minionRescue = {
 
       console.log("#p3-button click worked");
 
-      minionRescue.evilminion = new EvilMinion();
+      minionRescue.evilminion = new Player("Evil Minion");
 
       minionRescue.renderEvilMinion();
 
@@ -82,15 +76,21 @@ var minionRescue = {
   },
 
   renderMinion: function () {
-    $("div").eq(0).prepend("<img class='player' src='images/despicable-me-2-Minion-6.png'>");
+
+    $(".player1").remove();
+    $("div").eq(spaces).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
   },
 
   renderGru: function () {
-    $("div").prepend("<img class='player' src='images/gru.png'>");
+
+    $(".player2").remove();
+    $("div").eq(spaces).prev().prepend("<img class='player2' src='images/gru.png'>");
   },
 
   renderEvilMinion: function () {
-    $("div").prepend("<img class='player' src='images/evil-minion-4.png'>");
+
+    $(".player3").remove();
+    $("div").eq(spaces).prev().prepend("<img class='player3' src='images/evil-minion-4.png'>");
   }
 
 };
@@ -103,4 +103,5 @@ $(document).ready(function () {
 
 
 
-// NOTES: Write a function that places the icon in the first <div>. Then, using a function, figure out how to get the icon from the first div to the second. Once you have that figured out you can just iterate over said function the number of times required for the move each time.//
+// NOTES: Write a function that places the icon in the first <div>. Then, using a function, figure out how to get the icon from the first div to the second. Once you have that figured out you can just iterate over said function the number of times required for the move each time.
+// Use .prev() / .next() and move *
