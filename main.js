@@ -1,31 +1,31 @@
 //Player constructor
 
-function Player() {
+function Player(name) {
   this.name = "Minion" || "Gru" || "Evil Minion";
-
-  this.move = function (divs) {
-    var spaces = Math.floor((Math.random() * 12) + 1);
-    //Writing the random math generator in this manner returns randomly any number between 1 and 12, including 12 and always a whole number.
-    console.log(this.name + " has moved forward " + spaces + " spaces");
-    evilminion.number("5")
-  };
 }
 
 //Evil Minion steals toy constructor
 
 function EvilMinion() {
-  this.move = "5";
-
-  if ((this.name === "Evil Minion") && (this.move === "5")) {
+  if ((this.name === "Evil Minion") && (evil.move === "5")) {
     $(".agnes").replaceWith('<img class="agnes" src="../images/sad-agnes.png" alt="">');
     //This .replaceWith does work, tested it in the Console.
   };
 }
 
-//Evil Minion constructor
+//Game over constructor
 
-function EvilMinion() {
-  this.name = "Evil Minion";
+function GameOver() {
+  if ($(".player3").parent("div").index() === "99") {
+    $(".sisters").remove();
+    alert('Game over, the Evil Minion has taken the sisters!');
+  }
+  else if ($(".player1").parent("div").index() === "99") {
+    alert("Congratulations! Minion has rescued the sisters before the Evil Minion could get to them!");
+  }
+  else if ($(".player2").parent("div").index() === "99") {
+    alert("Congratulations! Gru has rescued the sisters before the Evil Minion could get to them!");
+  };
 }
 
 
@@ -46,9 +46,7 @@ var minionRescue = {
 
       console.log("#p1-button click worked");
 
-      minionRescue.player = new Player("Minion");
-
-      minionRescue.renderMinion(minionRescue.player.move);
+      minionRescue.renderMinion();
 
     });
 
@@ -56,8 +54,6 @@ var minionRescue = {
       event.preventDefault();
 
       console.log("#p2-button click worked");
-
-      minionRescue.gru = new Player("Gru");
 
       minionRescue.renderGru();
 
@@ -68,8 +64,6 @@ var minionRescue = {
 
       console.log("#p3-button click worked");
 
-      minionRescue.evilminion = new Player("Evil Minion");
-
       minionRescue.renderEvilMinion();
 
     });
@@ -77,20 +71,41 @@ var minionRescue = {
 
   renderMinion: function () {
 
+      var minion = new Player("Minion");
+
+      var spaces = Math.floor((Math.random() * 12) + 1);
+      //Writing the random math generator in this manner returns randomly any number between 1 and 12, including 12 and always a whole number.
+      console.log(minion.name + " has moved forward " + spaces + " spaces");
+
+    var current = $(".player1").parent("div").index();
     $(".player1").remove();
-    $("div").eq(spaces).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
-  },
+    $("div").eq(current + spaces).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
+  }, //Works for all rolls but the first. Need to figure out a way to move it forward 1 on first roll.
 
   renderGru: function () {
 
+    var gru = new Player("Gru");
+
+    var spaces = Math.floor((Math.random() * 12) + 1);
+    //Writing the random math generator in this manner returns randomly any number between 1 and 12, including 12 and always a whole number.
+    console.log(gru.name + " has moved forward " + spaces + " spaces");
+
+    var current = $(".player2").parent("div").index();
     $(".player2").remove();
-    $("div").eq(spaces).prev().prepend("<img class='player2' src='images/gru.png'>");
+    $("div").eq(current + spaces).prev().prepend("<img class='player2' src='images/gru.png'>");
   },
 
   renderEvilMinion: function () {
 
+    var evil = new Player("Evil Minion");
+
+    var spaces = Math.floor((Math.random() * 12) + 1);
+    //Writing the random math generator in this manner returns randomly any number between 1 and 12, including 12 and always a whole number.
+    console.log(evil.name + " has moved forward " + spaces + " spaces");
+
+    var current = $(".player3").parent("div").index();
     $(".player3").remove();
-    $("div").eq(spaces).prev().prepend("<img class='player3' src='images/evil-minion-4.png'>");
+    $("div").eq(current + spaces).prev().prepend("<img class='player3' src='images/evil-minion-4.png'>");
   }
 
 };
