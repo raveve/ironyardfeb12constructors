@@ -11,7 +11,7 @@ button {
 
 .buttons {
   border: none;
-  margin-left: 2.65%; }
+  margin-left: 1%; }
 
 div, aside {
   border: 2px solid #000000;
@@ -20,13 +20,16 @@ div, aside {
   display: inline-block;
   position: relative; }
 
+.buttons {
+  width: 6%; }
+
 .player1, .player2, .player3 {
   float: left;
   padding-top: 15%;
-  padding-left: 4%; }
+  padding-left: 2%; }
 
 .left-div {
-  margin-left: 10.95%; }
+  margin-left: 7.25%; }
 
 .right-div {
   margin-right: 6%; }
@@ -41,7 +44,6 @@ div, aside {
   padding-top: 5px; }
 
 .sisters {
-  width: 10%;
   height: 65px;
   float: right;
   margin-right: 1%;
