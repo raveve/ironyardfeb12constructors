@@ -1,7 +1,9 @@
 //Player constructor
 
-function Player(name) {
-  this.name = "Minion" || "Gru" || "Evil Minion";
+function Player(character) {
+  this.name = character;
+
+  // Character names "Minion" || "Gru" || "Evil Minion";
 
   //I planned to have my "spaces" math function here vs in all of my Render functions below, but I could not figure out how to access it.
 }
@@ -82,7 +84,7 @@ var minionRescue = {
     var current = $(".player1").parent("div").index();
     $(".player1").remove();
     $("div").eq(current + spaces).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
-  }, //Works for all rolls but the first. Need to figure out a way to move it forward 1 on first roll.
+  },
 
   renderGru: function () {
 
