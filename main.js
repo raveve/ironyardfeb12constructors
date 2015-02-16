@@ -1,37 +1,45 @@
-//Player constructor
+// Minion constructor
 
-function Player(character) {
-  this.name = character;
+function Minion() {
+  this.name = "Minion";
 
-  // Character names "Minion" || "Gru" || "Evil Minion";
-
-  //I planned to have my "spaces" math function here vs in all of my Render functions below, but I could not figure out how to access it.
+  this.move = function () {
+    var spaces = Math.floor((Math.random() * 12) + 1);
+    console.log(this.name + " has moved forward " + spaces + " spaces");
+    return spaces;
+  }
 }
 
-//Evil Minion steals toy constructor
+// Gru constructor
+
+function Gru() {
+  this.name = "Gru";
+
+  this.move = function () {
+    var spaces = Math.floor((Math.random() * 12) +1);
+    console.log(this.name + " has moved forward " + spaces + " spaces");
+    return spaces;
+  }
+}
+
+// Evil Minion constructor
 
 function EvilMinion() {
-  if ((this.name === "Evil Minion") && (evil.move === "5")) {
-    $(".agnes").replaceWith('<img class="agnes" src="../images/sad-agnes.png" alt="">');
-    //This .replaceWith does work, tested it in the Console.
-  };
-}
+  this.name = "Evil Minion";
 
-//Game over constructor
-
-function GameOver() {
-  if ($(".player3").parent("div").index() >= "99") {
-    $(".sisters").remove();
-    alert('Game over, the Evil Minion has taken the sisters!');
+  this.move = function () {
+    var spaces = Math.floor((Math.random() * 12) +1);
+    console.log(this.name + " has moved forward " + spaces + " spaces");
+    return spaces;
   }
-  else if ($(".player1").parent("div").index() >= "99") {
-    alert("Congratulations! Minion has rescued the sisters before the Evil Minion could get to them!");
+  this.steal = function () {
+    if (this.name === "Evil Minion" && this.move === 5) {
+      $(".agnes").replaceWith('<img class="agnes" src="../images/sad-agnes.png" alt="">');
+      // This .replaceWith does work, tested it in the Console, not sure if the "if" is correct though
+      // Original if statement: if (this.name === "Evil Minion" && this.move === 5)
+    }
   }
-  else if ($(".player2").parent("div").index() >= "99") {
-    alert("Congratulations! Gru has rescued the sisters before the Evil Minion could get to them!");
-  };
 }
-
 
 var minionRescue = {
 
@@ -40,78 +48,78 @@ var minionRescue = {
   },
 
   initStyling: function () {
-
   },
 
   initEvents: function () {
 
     $("#p1-button").on("click", function (event) {
       event.preventDefault();
-
       console.log("#p1-button click worked");
 
-      minionRescue.renderMinion();
+      minionRescue.minion = new Minion();
+      console.log(Minion);
 
+      minionRescue.renderMinion();
     });
 
     $("#p2-button").on("click", function (event) {
       event.preventDefault();
-
       console.log("#p2-button click worked");
 
-      minionRescue.renderGru();
+      minionRescue.gru = new Gru();
+      console.log(Gru);
 
+      minionRescue.renderGru();
     });
 
     $("#p3-button").on("click", function (event) {
       event.preventDefault();
-
       console.log("#p3-button click worked");
 
-      minionRescue.renderEvilMinion();
+      minionRescue.evilminion = new EvilMinion();
+      console.log(EvilMinion);
 
+      minionRescue.renderEvilMinion();
     });
   },
 
-  renderMinion: function () {
-
-      var minion = new Player("Minion");
-
-      var spaces = Math.floor((Math.random() * 12) + 1);
-      //Writing the random math generator in this manner returns randomly any number between 1 and 12, including 12 and always a whole number.
-      console.log(minion.name + " has moved forward " + spaces + " spaces");
-
+  renderMinion: function() {
     var current = $(".player1").parent("div").index();
     $(".player1").remove();
-    $("div").eq(current + spaces).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
+
+
+    if ($(".player1").parent("div").index() >= 99) {
+      $("div").eq(99).prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
+      alert("Congratulations! Minion has rescued the sisters before the Evil Minion could get to them!");
+    } else {
+        $("div").eq(current + minionRescue.minion.move()).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
+    }
   },
 
-  renderGru: function () {
-
-    var gru = new Player("Gru");
-
-    var spaces = Math.floor((Math.random() * 12) + 1);
-    //Writing the random math generator in this manner returns randomly any number between 1 and 12, including 12 and always a whole number.
-    console.log(gru.name + " has moved forward " + spaces + " spaces");
-
+  renderGru: function() {
     var current = $(".player2").parent("div").index();
     $(".player2").remove();
-    $("div").eq(current + spaces).prev().prepend("<img class='player2' src='images/gru.png'>");
+
+    if ($(".player2").parent("div").index() >= 99) {
+      $("div").eq(99).prepend("<img class='player2' src='images/gru.png'>");
+      alert("Congratulations! Gru has rescued the sisters before the Evil Minion could get to them!");
+    } else {
+        $("div").eq(current + minionRescue.gru.move()).prev().prepend("<img class='player2' src='images/gru.png'>");
+    }
   },
 
   renderEvilMinion: function () {
-
-    var evil = new Player("Evil Minion");
-
-    var spaces = Math.floor((Math.random() * 12) + 1);
-    //Writing the random math generator in this manner returns randomly any number between 1 and 12, including 12 and always a whole number.
-    console.log(evil.name + " has moved forward " + spaces + " spaces");
-
     var current = $(".player3").parent("div").index();
     $(".player3").remove();
-    $("div").eq(current + spaces).prev().prepend("<img class='player3' src='images/evil-minion-4.png'>");
-  }
 
+    if ($(".player3").parent("div").index() >= 99) {
+      $("div").eq(99).prepend("<img class='player3' src='images/evil-minion-4.png'>");
+      $(".sisters").remove();
+      alert('Game over, the Evil Minion has taken the sisters!');
+    } else {
+        $("div").eq(current + minionRescue.evilminion.move()).prev().prepend("<img class='player3' src='images/evil-minion-4.png'>");
+    }
+  },
 };
 
 $(document).ready(function () {
