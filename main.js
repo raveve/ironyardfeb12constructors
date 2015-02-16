@@ -30,14 +30,11 @@ function EvilMinion() {
   this.move = function () {
     var spaces = Math.floor((Math.random() * 12) +1);
     console.log(this.name + " has moved forward " + spaces + " spaces");
-    return spaces;
-  }
-  this.steal = function () {
-    if (this.name === "Evil Minion" && this.move === 5) {
+
+    if (spaces === 5) {
       $(".agnes").replaceWith('<img class="agnes" src="../images/sad-agnes.png" alt="">');
-      // This .replaceWith does work, tested it in the Console, not sure if the "if" is correct though
-      // Original if statement: if (this.name === "Evil Minion" && this.move === 5)
     }
+    return spaces;
   }
 }
 
@@ -57,7 +54,6 @@ var minionRescue = {
       console.log("#p1-button click worked");
 
       minionRescue.minion = new Minion();
-      console.log(Minion);
 
       minionRescue.renderMinion();
     });
@@ -67,7 +63,6 @@ var minionRescue = {
       console.log("#p2-button click worked");
 
       minionRescue.gru = new Gru();
-      console.log(Gru);
 
       minionRescue.renderGru();
     });
@@ -77,7 +72,6 @@ var minionRescue = {
       console.log("#p3-button click worked");
 
       minionRescue.evilminion = new EvilMinion();
-      console.log(EvilMinion);
 
       minionRescue.renderEvilMinion();
     });
@@ -85,39 +79,48 @@ var minionRescue = {
 
   renderMinion: function() {
     var current = $(".player1").parent("div").index();
-    $(".player1").remove();
+    var counter = minionRescue.minion.move();
+    console.info(current + counter);
 
-
-    if ($(".player1").parent("div").index() >= 99) {
+    if ((current + counter) >= 99){
+      $(".player1").remove();
       $("div").eq(99).prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
       alert("Congratulations! Minion has rescued the sisters before the Evil Minion could get to them!");
     } else {
-        $("div").eq(current + minionRescue.minion.move()).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
+      $(".player1").remove();
+      $("div").eq(current + counter).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
     }
   },
 
   renderGru: function() {
     var current = $(".player2").parent("div").index();
-    $(".player2").remove();
+    var counter = minionRescue.gru.move();
+    console.info(current + counter);
 
-    if ($(".player2").parent("div").index() >= 99) {
+    if ((current + counter) >= 99) {
+      $(".player2").remove();
       $("div").eq(99).prepend("<img class='player2' src='images/gru.png'>");
       alert("Congratulations! Gru has rescued the sisters before the Evil Minion could get to them!");
     } else {
-        $("div").eq(current + minionRescue.gru.move()).prev().prepend("<img class='player2' src='images/gru.png'>");
+        $(".player2").remove();
+        $("div").eq(current + counter).prev().prepend("<img class='player2' src='images/gru.png'>");
     }
   },
 
   renderEvilMinion: function () {
     var current = $(".player3").parent("div").index();
+    var counter = minionRescue.evilminion.move();
+    console.info(current + counter);
     $(".player3").remove();
 
-    if ($(".player3").parent("div").index() >= 99) {
+    if ((current + counter) >= 99) {
+      $(".player3").remove();
       $("div").eq(99).prepend("<img class='player3' src='images/evil-minion-4.png'>");
       $(".sisters").remove();
       alert('Game over, the Evil Minion has taken the sisters!');
     } else {
-        $("div").eq(current + minionRescue.evilminion.move()).prev().prepend("<img class='player3' src='images/evil-minion-4.png'>");
+        $(".player3").remove();
+        $("div").eq(current + counter).prev().prepend("<img class='player3' src='images/evil-minion-4.png'>");
     }
   },
 };
