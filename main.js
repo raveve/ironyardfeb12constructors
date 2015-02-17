@@ -6,6 +6,14 @@ function Minion() {
   this.move = function () {
     var spaces = Math.floor((Math.random() * 12) + 1);
     console.log(this.name + " has moved forward " + spaces + " spaces");
+
+    if (spaces === 1) {
+      var current = $(".player1").parent("div").index();
+      $(".player3").remove();
+      $("div").eq(current - 10).prepend('<img class="player3" src="../images/evil-minion-2.png">');
+      alert("Evil Minion has been stunned by Minion. Evil Minion loses a turn. (Skip Player 3 on next go round.)");
+      // When time allows, add a disable to the "Player 3" button that enables again upon the "Player 1" button click.
+    }
     return spaces;
   }
 }
@@ -16,8 +24,12 @@ function Gru() {
   this.name = "Gru";
 
   this.move = function () {
-    var spaces = Math.floor((Math.random() * 12) +1);
+    var spaces = Math.floor((Math.random() * 12) + 1);
     console.log(this.name + " has moved forward " + spaces + " spaces");
+
+    if (spaces === 12) {
+      $(".player1").replaceWith('<img class="player1" src="../images/dancing-minion.png">');
+    }
     return spaces;
   }
 }
@@ -28,11 +40,12 @@ function EvilMinion() {
   this.name = "Evil Minion";
 
   this.move = function () {
-    var spaces = Math.floor((Math.random() * 12) +1);
+    var spaces = Math.floor((Math.random() * 12) + 1);
     console.log(this.name + " has moved forward " + spaces + " spaces");
 
     if (spaces === 5) {
       $(".agnes").replaceWith('<img class="agnes" src="../images/sad-agnes.png" alt="">');
+      alert("Agnes is sad, Evil Minion stole her fluffy.");
     }
     return spaces;
   }
