@@ -8,9 +8,7 @@ function Minion() {
     console.log(this.name + " has moved forward " + spaces + " spaces");
 
     if (spaces === 1) {
-      var current = $(".player1").parent("div").index();
-      $(".player3").remove();
-      $("div").eq(current - 10).prepend('<img class="player3" src="../images/evil-minion-2.png">');
+      $(".player3").replaceWith('<img class="player3" src="../images/evil-minion-2.png">');
       alert("Evil Minion has been stunned by Minion. Evil Minion loses a turn. (Skip Player 3 on next go round.)");
       // When time allows, add a disable to the "Player 3" button that enables again upon the "Player 1" button click.
     }
@@ -29,6 +27,8 @@ function Gru() {
 
     if (spaces === 12) {
       $(".player1").replaceWith('<img class="player1" src="../images/dancing-minion.png">');
+      $(".music").trigger('play');
+      alert("Welcome to the luau, it's a dance party!")
     }
     return spaces;
   }
