@@ -8,7 +8,7 @@ function Minion() {
     console.log(this.name + " has moved forward " + spaces + " spaces");
 
     if (spaces === 1) {
-      $(".player3").replaceWith('<img class="player3" src="../images/evil-minion-2.png">');
+      $(".player3").replaceWith('<img class="player3" src="images/evil-minion-2.png">');
       alert("Evil Minion has been stunned by Minion. Evil Minion loses a turn. (Skip Player 3 on next go round.)");
       // When time allows, add a disable to the "Player 3" button that enables again upon the "Player 1" button click.
     }
@@ -26,7 +26,7 @@ function Gru() {
     console.log(this.name + " has moved forward " + spaces + " spaces");
 
     if (spaces === 12) {
-      $(".player1").replaceWith('<img class="player1" src="../images/dancing-minion.png">');
+      $(".player1").replaceWith('<img class="player1" src="images/dancing-minion.png">');
       $(".music").trigger('play');
       alert("Welcome to the luau, it's a dance party!")
     }
@@ -44,7 +44,7 @@ function EvilMinion() {
     console.log(this.name + " has moved forward " + spaces + " spaces");
 
     if (spaces === 5) {
-      $(".agnes").replaceWith('<img class="agnes" src="../images/sad-agnes.png" alt="">');
+      $(".agnes").replaceWith('<img class="agnes" src="images/sad-agnes.png" alt="">');
       alert("Agnes is sad, Evil Minion stole her fluffy.");
     }
     return spaces;
@@ -97,11 +97,11 @@ var minionRescue = {
 
     if ((current + counter) >= 99){
       $(".player1").remove();
-      $("div").eq(99).prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
+      $("div").eq(99).prepend("<img class='player1' src='images/despicable-me-2-minion-6.png'>");
       alert("Congratulations! Minion has rescued the sisters before the Evil Minion could get to them!");
     } else {
       $(".player1").remove();
-      $("div").eq(current + counter).prev().prepend("<img class='player1' src='images/despicable-me-2-Minion-6.png'>");
+      $("div").eq(current + counter).prev().prepend("<img class='player1' src='images/despicable-me-2-minion-6.png'>");
     }
   },
 
